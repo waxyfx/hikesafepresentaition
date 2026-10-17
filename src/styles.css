@@ -21,7 +21,6 @@ html {
 }
 body {
   margin: 0;
-  overflow-x: clip;
 }
 button,
 input {
@@ -563,6 +562,7 @@ a:hover {
   font-size: 11px;
 }
 .solution-section {
+  overflow: hidden;
   text-align: center;
   border-top: 1px solid var(--border);
   padding-bottom: 70px;
