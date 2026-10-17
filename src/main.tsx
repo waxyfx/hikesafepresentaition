@@ -1,11 +1,12 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { demoReducer, defaultPlan, initialState, signals } from './demo';
-import { ProductDemo, ScenarioControls, Status } from './ProductDemo';
+import { ProductDemo, ScenarioControls, Status, type PrototypeSnapshot } from './ProductDemo';
 import { TerrainMap } from './TerrainMap';
 import { ConnectedStory, MetricCarousel, OrbitStory } from './DesignStories';
 import './styles.css';
 import './design-stories.css';
+import './prototype.css';
 
 const chapters = [
   'home',
@@ -53,6 +54,7 @@ function Logo() {
 }
 function App() {
   const [state, dispatch] = useReducer(demoReducer, initialState);
+  const [prototype, setPrototype] = useState<PrototypeSnapshot | null>(null);
   const [menu, setMenu] = useState(false);
   const [presentation, setPresentation] = useState(false);
   const [chapter, setChapter] = useState(0);
@@ -336,42 +338,42 @@ function App() {
           </div>
           <div className="risk-instrument">
             <div className="panel-topline">
-              <span>RISK ENGINE / LIVE DEMO STATE</span>
+              <span>RISK ENGINE / ACTUAL APP STATE</span>
               <span>◈</span>
             </div>
             <div
               className={`risk-gauge ${signal.risk.toLowerCase()}`}
-              style={{ '--score': `${signal.score}%` } as React.CSSProperties}
+              style={{ '--score': `${prototype?.risk?.score ?? 0}%` } as React.CSSProperties}
             >
               <div>
                 <small>RISK SCORE</small>
-                <strong>{state.active || state.completed ? signal.score : '—'}</strong>
-                <Status state={state} />
+                <strong>{prototype?.risk?.score ?? '—'}</strong>
+                <span className="status">{prototype?.risk?.level || 'AWAITING HIKE'}</span>
               </div>
             </div>
             <dl className="risk-signals">
               <div>
-                <dt>Movement</dt>
-                <dd>{state.active || state.completed ? signal.motion : 'Awaiting hike'}</dd>
+                <dt>Hike</dt>
+                <dd>{prototype?.active?.status || 'Awaiting hike'}</dd>
               </div>
               <div>
                 <dt>GPS</dt>
-                <dd>{signal.gps ? 'Available' : 'SIGNAL UNKNOWN'}</dd>
+                <dd>{prototype?.points ? `${prototype.points} demo samples` : 'No samples'}</dd>
               </div>
               <div>
                 <dt>Network</dt>
-                <dd>{signal.network ? 'Online' : 'Offline'}</dd>
+                <dd>{prototype?.network || '—'}</dd>
               </div>
               <div>
                 <dt>Incident</dt>
-                <dd>{state.incident?.status || 'Not created'}</dd>
+                <dd>{prototype?.alert?.lifecycle || 'Not created'}</dd>
               </div>
             </dl>
             <a href="#demo" className="text-button">
               CONTROL THE SIGNALS IN THE DEMO ↗
             </a>
             <p className="small-note">
-              Illustrative thresholds and scores, not a validated safety model.
+              Calculated by the existing prototype. A prototype, not a validated safety model.
             </p>
           </div>
         </section>
@@ -414,21 +416,21 @@ function App() {
               <p>
                 {state.active || state.completed
                   ? signal.detail
-                  : 'Start a demo hike to activate the scenario controls.'}
+                  : 'Explore the explanatory route diagram. The actual application is below.'}
               </p>
               {!state.active && !state.completed && (
                 <button
                   className="button primary full"
                   onClick={() => dispatch({ type: 'start', plan: defaultPlan })}
                 >
-                  START DEMO HIKE ↗
+                  EXPLORE ROUTE DIAGRAM ↗
                 </button>
               )}
             </div>
           </div>
           <ScenarioControls state={state} dispatch={dispatch} />
           <small className="small-note">
-            Concept map · illustrative route geometry, not for navigation.
+            Interactive explanation · illustrative data and route geometry. Independent of the real app below.
           </small>
         </section>
 
@@ -484,7 +486,7 @@ function App() {
 
         <ConnectedStory />
         <section id="demo" className="section demo-section">
-          <ProductDemo state={state} dispatch={dispatch} />
+          <ProductDemo onSnapshot={setPrototype} />
         </section>
 
         <section id="architecture" className="section architecture-section">
