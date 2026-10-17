@@ -3,7 +3,9 @@ import { createRoot } from 'react-dom/client';
 import { demoReducer, defaultPlan, initialState, signals } from './demo';
 import { ProductDemo, ScenarioControls, Status } from './ProductDemo';
 import { TerrainMap } from './TerrainMap';
+import { ConnectedStory, MetricCarousel, OrbitStory } from './DesignStories';
 import './styles.css';
+import './design-stories.css';
 
 const chapters = [
   'home',
@@ -11,8 +13,10 @@ const chapters = [
   'solution',
   'how-it-works',
   'technology',
+  'signal-cards',
   'live-map',
   'offline',
+  'stay-connected',
   'demo',
   'architecture',
   'almaty',
@@ -25,8 +29,10 @@ const chapterNames = [
   'A return plan',
   'How it works',
   'Risk intelligence',
+  'The signals in focus',
   'On the trail',
   'Beyond the network',
+  'Stay in the loop',
   'Live prototype',
   'Under the surface',
   'Made for Almaty',
@@ -53,13 +59,11 @@ function App() {
   const signal = signals[state.scenario];
   const scrollToChapter = (index: number) => {
     const next = Math.max(0, Math.min(chapters.length - 1, index));
-    document
-      .getElementById(chapters[next]!)
-      ?.scrollIntoView({
-        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
-          ? 'instant'
-          : 'smooth',
-      });
+    document.getElementById(chapters[next]!)?.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ? 'instant'
+        : 'smooth',
+    });
     setChapter(next);
   };
   useEffect(() => {
@@ -265,45 +269,7 @@ function App() {
           </div>
         </section>
 
-        <section id="solution" className="section solution-section">
-          <span className="eyebrow">02 / A RETURN PLAN, WITH INTELLIGENCE</span>
-          <h2>
-            Watches the hike.
-            <br />
-            <span className="muted">Not the hiker.</span>
-          </h2>
-          <p className="body-copy">
-            HIKE SAFE brings the signals together to identify
-            <br />
-            potential danger before silence becomes an emergency.
-          </p>
-          <div className="signal-orbit">
-            <div className="orbit-ring ring-one" />
-            <div className="orbit-ring ring-two" />
-            <div className="orbit-center">
-              <Logo />
-              <span>ONE HIKE. A CLEARER PICTURE.</span>
-              <svg viewBox="0 0 240 100" aria-hidden="true">
-                <path d="m0 80 40-28 33 9 22-40 28 27 39-35 26 16 52-28" />
-              </svg>
-            </div>
-            {[
-              ['ETA', 'Expected return'],
-              ['GPS', 'Verified location'],
-              ['MOTION', 'Actual movement'],
-              ['ROUTE', 'Planned progress'],
-              ['CHECK-IN', 'Hiker confirmation'],
-              ['SYNC', 'Last connection'],
-            ].map(([title, text], i) => (
-              <div key={title} className={`signal-node node-${i}`}>
-                <span className="tiny-dot" />
-                <strong>{title}</strong>
-                <small>{text}</small>
-              </div>
-            ))}
-          </div>
-          <p className="center-caption">Active during the hike. Designed around the journey.</p>
-        </section>
+        <OrbitStory />
 
         <section id="how-it-works" className="section how-section">
           <div className="section-heading">
@@ -410,6 +376,7 @@ function App() {
           </div>
         </section>
 
+        <MetricCarousel state={state} />
         <section id="live-map" className="section live-map-section">
           <div className="section-heading">
             <div>
@@ -515,6 +482,7 @@ function App() {
           </div>
         </section>
 
+        <ConnectedStory />
         <section id="demo" className="section demo-section">
           <ProductDemo state={state} dispatch={dispatch} />
         </section>
