@@ -1,36 +1,30 @@
-# HIKE SAFE — interactive presentation
+# HIKE SAFE — Assignment 1 presentation
 
-Separate React + TypeScript + Vite website. The existing Expo mobile app remains in the repository root.
+Live site: https://waxyfx.github.io/hikesafepresentaition/
 
-## Run from this repository
+The existing presentation is organized into 15 chapters: introduction, problem, evidence, Almaty, current approaches, solution, evidence-to-design, mechanism, technical logic, live prototype, architecture, limitations, future work, conclusion, references. Eight institutional sources are cited inline; unverified dates are marked n.d. Demo data and design hypotheses are distinguished from research.
 
-```powershell
-cd C:\Users\serik\hikingsafe\presentation
-npm run dev
-```
+## Run and publish
 
-Open http://127.0.0.1:4173. To create a static release, run `npm run build`; the output is `presentation/dist`.
+Run npm install and npm run dev in this folder. For GitHub Pages run npm run build:pages, commit docs/, and publish main /docs. The existing Expo app lives in the parent workspace; public/prototype contains its real web export. No replacement app screens are used.
+
+Refresh the prototype from the parent workspace with EXPO_NO_DOTENV=1 and EXPO_PUBLIC_PRESENTATION=true, then run npx expo export --platform web --output-dir presentation/public/prototype. Rebuild the website afterwards. The export disables the backend and uses a temporary SQLite database. Native behavior is unchanged. The Pages build only rebases exported asset paths. isolation.js supplies the browser isolation headers needed by SQLite on static hosting; it does not cache requests.
 
 ## Presenter guide
 
-1. Click **PRESENTATION MODE**. Arrow keys move through 14 chapters; Escape exits. Normal scrolling remains available.
-2. Open **TRY PROTOTYPE**, then **ENTER FULL DEMO** for a focused view.
-3. In the phone, choose **START A HIKE**, review the defaults, then **START HIKE**.
-4. Use the scenario buttons: Normal → Stationary 2h+ → GPS lost → Overdue → Critical → SOS → Returned safe.
-5. Phone, terrain maps, risk indicator, offline queue and monitoring console share the same reducer.
-6. **RESET DEMO** returns the phone to its home screen and clears incidents and history.
+Use PRESENTATION MODE and arrow keys for the 15 chapters; Escape exits. In LIVE PROTOTYPE choose Start a hike → Medeu → Continue through the existing review flow → Start a hike. Then demonstrate WALKING → STATIONARY → GPS LOST → OVERDUE → CRITICAL. Use the actual app's SOS confirmation and Finish hike controls. RESET DEMO clears only the disposable iframe session. OPEN APP opens a separate fresh session; FULL SCREEN expands the demonstration.
 
-The phone's SOS button requires confirmation. The separate presenter scenario panel applies an explicitly simulated SOS directly. A resolved hike ignores later risk actions. Start another hike or reset to begin again.
+GPS LOST uses stale simulated fixes. The app must show UNKNOWN movement and no inactivity reason. The adjacent console and technical risk gauge receive snapshots directly from the original runtime. A low score with unknown GPS is not proof of safety. Backend delivery and emergency services are disabled in this website. Browser GPS is simulated, maps are schematic, and reload discards the session.
 
-## What is simulated
+## Validation and rubric review
 
-All names, GPS positions, samples, timestamps, risk scores, queues and incidents are fictional browser state. Scenario buttons select illustrative snapshots, so their timestamps need not advance in click order. The terrain is an SVG illustration and must not be used for navigation. No device permissions, accounts, Supabase connections or emergency services are used. The architecture diagram describes the intended mobile system, not this website's deployment. Refreshing the page resets the demo.
+- Structure: exact 15-section sequence, presentation controls, concise headings, evidence labels and diagrams.
+- Evidence: eight traceable sources, local official totals with scope caveat, no invented outcome statistics; preliminary thresholds are labelled.
+- Local relevance: Almaty route materials and emergency guidance; no claim of measured route coverage or incident rates.
+- Solution: explicit definition, bounded functional comparison, evidence-to-feature mapping, original prototype reused.
+- Limits: no field validation, official dispatch, satellite communication, guaranteed GPS or guaranteed delivery; no grade is guaranteed.
 
-This same-day demo validates a return time after departure. Real multi-day hikes and validated risk thresholds are outside its scope. Normal route movement is a looping visual simulation, not real GPS tracking. Future features are labeled as possibilities.
-
-## Checks
-
-Run root `npm run lint` and `npm run typecheck`; run `npx vitest run presentation/src/demo.test.ts` from the root for the simulation invariants. The presentation also has its own `typecheck` script.
+Root lint and typecheck, presentation typecheck, and 119 existing tests pass, including the added GPS-loss regression in the runtime test. Browser checks cover hike creation, stationary versus missing GPS, critical incident, SOS confirmation, completion, reset, and the static Pages export.
 
 ## Assets
 

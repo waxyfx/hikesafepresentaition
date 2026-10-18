@@ -1,0 +1,373 @@
+.research-section h2 {
+  font-size: clamp(40px, 5vw, 76px);
+  line-height: 1.03;
+  letter-spacing: -0.045em;
+}
+.research-section .section-heading > p {
+  max-width: 390px;
+}
+.evidence-label {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: #b9d395;
+  display: block;
+  margin-bottom: 18px;
+}
+.citations {
+  display: inline-flex;
+  gap: 5px;
+  margin-left: 5px;
+  vertical-align: baseline;
+}
+.citations a {
+  color: #bcdb91;
+  font-size: 12px;
+  border-bottom: 1px solid #8ca269;
+}
+.citations a:hover {
+  color: #fff;
+}
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: #344334;
+  border: 1px solid #344334;
+}
+.evidence-card {
+  background: #101811;
+  padding: 35px;
+}
+.evidence-card h3 {
+  font-size: 27px;
+  line-height: 1.2;
+  font-weight: 400;
+  margin: 15px 0;
+}
+.evidence-card p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #b2bdab;
+}
+.evidence-number {
+  font-size: 100px;
+  line-height: 1;
+  font-weight: 300;
+  letter-spacing: -0.06em;
+  color: #c2dc9e;
+}
+.evidence-card .small-note {
+  font-size: 11px;
+  margin-top: 20px;
+}
+.design-inference {
+  border-top: 1px solid #354331;
+  margin-top: 26px;
+  padding-top: 18px;
+  color: #dbe4d0 !important;
+}
+.research-boundary {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #a9b4a0;
+  border-left: 2px solid #8ba56c;
+  padding: 12px 22px;
+  margin-top: 28px;
+}
+.research-boundary b {
+  color: #e0e8d7;
+  font-weight: 500;
+}
+.local-section {
+  position: relative;
+  background:
+    linear-gradient(90deg, #0e160fee, #0d170eea),
+    url('/mountain.jpg') center/cover;
+}
+.local-context {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+}
+.local-context h3 {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 20px 0;
+}
+.local-context p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #b5c0ae;
+  margin-bottom: 20px;
+}
+.route-demo-label {
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: #d3c599;
+  display: block;
+  line-height: 1.8;
+}
+.local-chain {
+  list-style: none;
+  padding: 0;
+  counter-reset: chain;
+}
+.local-chain li {
+  border-top: 1px solid #3a4933;
+  padding: 20px 0;
+  font-size: 17px;
+  counter-increment: chain;
+}
+.local-chain li:before {
+  content: '0' counter(chain) '  ↓';
+  font-size: 10px;
+  color: #b6ce96;
+  margin-right: 20px;
+}
+.local-chain small {
+  display: block;
+  margin: 8px 0 0 47px;
+  font-size: 11px;
+  color: #a7b39d;
+  line-height: 1.6;
+}
+.design-table {
+  border-top: 1px solid #384331;
+}
+.design-table > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  border-bottom: 1px solid #384331;
+  padding: 25px 0;
+}
+.design-table p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #b8c2af;
+}
+.design-table p:last-child {
+  color: #dce6d0;
+}
+.design-table-head {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: #a9bf8e;
+}
+.limitations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+.limitations-grid article {
+  border-top: 1px solid #514e36;
+  padding-top: 20px;
+}
+.limitations-grid article > span {
+  color: #c6bb8b;
+}
+.limitations-grid h3 {
+  font-size: 23px;
+  font-weight: 400;
+  margin: 20px 0 12px;
+}
+.limitations-grid p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #b5baa7;
+}
+.reference-list {
+  list-style: none;
+  padding: 0;
+}
+.reference-list li {
+  display: flex;
+  gap: 30px;
+  border-top: 1px solid #344132;
+  padding: 24px 0;
+  scroll-margin-top: 100px;
+}
+.reference-list li:target {
+  background: #a6c48512;
+  outline: 1px solid #7f9b61;
+  padding: 24px 15px;
+}
+.reference-list li > span {
+  color: #bdd399;
+  font-size: 13px;
+}
+.reference-list h3 {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.reference-list p {
+  font-size: 12px;
+  color: #a7b299;
+  margin: 7px 0;
+  line-height: 1.7;
+}
+.reference-list a {
+  font-size: 11px;
+  color: #c4d7ad;
+  overflow-wrap: anywhere;
+}
+.reference-use {
+  max-width: 850px;
+}
+.references-section > .button {
+  margin-top: 30px;
+}
+.validation-sequence {
+  font-size: 11px;
+  line-height: 2;
+  letter-spacing: 0.05em;
+  color: #b8cba2;
+  margin: 0 0 28px;
+}
+.technical-extras {
+  padding: 0 7vw 70px;
+}
+.technical-extras summary {
+  cursor: pointer;
+  padding: 20px 0;
+  border-top: 1px solid #344132;
+  font-size: 12px;
+  color: #c2d1b1;
+}
+.technical-notes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 30px 7vw 70px;
+}
+.technical-notes p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #b6c2aa;
+}
+.technical-notes h3 {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 14px;
+}
+.solution-definition {
+  max-width: 670px;
+  margin: 20px auto;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #cbd4c2;
+}
+.orbit-story-label {
+  z-index: 8;
+}
+.orbit-tags {
+  flex-wrap: wrap;
+  max-width: 650px;
+  justify-content: center;
+}
+.rubric-note {
+  font-size: 11px;
+  color: #a5b298;
+  line-height: 1.7;
+}
+.hero-content > p {
+  max-width: 590px;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.comparison-row p {
+  line-height: 1.7;
+}
+.academic-technical > .risk-section {
+  padding-bottom: 40px;
+}
+.academic-technical .offline-section {
+  padding-top: 50px;
+}
+.references-section .section-heading {
+  align-items: flex-start;
+}
+@media (max-width: 700px) {
+  .evidence-grid,
+  .local-context,
+  .limitations-grid,
+  .technical-notes {
+    grid-template-columns: 1fr;
+  }
+  .evidence-card {
+    padding: 26px;
+  }
+  .local-context {
+    gap: 30px;
+  }
+  .design-table > div {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .design-table-head {
+    display: none !important;
+  }
+  .design-table p:before {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: #8eaa72;
+    margin-bottom: 7px;
+  }
+  .design-table p:nth-child(1):before {
+    content: 'RESEARCH FINDING';
+  }
+  .design-table p:nth-child(2):before {
+    content: 'DESIGN DECISION →';
+  }
+  .design-table p:nth-child(3):before {
+    content: 'HIKE SAFE FEATURE →';
+  }
+  .reference-list li {
+    gap: 14px;
+  }
+  .solution-definition {
+    font-size: 14px;
+    max-width: 90%;
+    line-height: 1.6;
+  }
+  .hero-content > p {
+    font-size: 13px;
+  }
+  .evidence-number {
+    font-size: 78px;
+  }
+  .limitations-grid {
+    gap: 28px;
+  }
+}
+@media print {
+  .site-header,
+  .presentation-controls,
+  .hero-buttons,
+  .orbit-story,
+  .technical-extras,
+  iframe {
+    display: none !important;
+  }
+  .section,
+  main > section {
+    break-inside: avoid;
+    min-height: 0 !important;
+    padding: 30px !important;
+  }
+  .hero {
+    height: auto !important;
+  }
+  .hero-content {
+    position: relative !important;
+  }
+  .reference-list a {
+    font-size: 10px;
+  }
+  .citations a {
+    color: #315022;
+  }
+}

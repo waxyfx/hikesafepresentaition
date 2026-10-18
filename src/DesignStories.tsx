@@ -33,8 +33,7 @@ const hikers = [
   'Kamila',
   'Dias',
 ];
-const manifesto =
-  'A hike is more than a route on a map. It is someone’s adventure. Someone’s promise to come home. HIKE SAFE brings a plan, verified movement and time together — so silence can become a signal worth noticing.';
+const manifesto = 'HIKE SAFE is a hiking safety system that combines a planned return time, verified GPS movement, offline data storage, and risk-state monitoring to identify when a hike may require attention.';
 
 export function OrbitStory() {
   const section = useRef<HTMLElement>(null);
@@ -103,7 +102,7 @@ export function OrbitStory() {
     <section className="orbit-story" id="solution" ref={section}>
       <div className={`orbit-scene ${phase ? 'manifesto-phase' : ''}`} ref={scene}>
         <div className="orbit-story-label">
-          <span>02 / PEOPLE, NOT JUST POSITIONS</span>
+          <span>06 / OUR SOLUTION</span>
           <span>16 FICTIONAL TRAIL COMPANIONS</span>
         </div>
         <div className="hiker-orbit" aria-hidden="true">
@@ -130,13 +129,13 @@ export function OrbitStory() {
           ))}
         </div>
         <div className="orbit-story-intro" aria-hidden={reduced ? false : !!phase}>
-          <span className="eyebrow">FOR THE PEOPLE BEHIND THE PIN.</span>
+          <span className="eyebrow">THE PROPOSED SYSTEM</span>
           <h2>
-            Every adventure.
+            Our solution.
             <br />
-            Someone’s <span>way home.</span>
+            A plan. <span>With context.</span>
           </h2>
-          <a className="button light-pill" href="#demo" tabIndex={phase && !reduced ? -1 : 0}>
+          <p className="solution-definition">HIKE SAFE is a hiking safety system that combines a planned return time, verified GPS movement, offline data storage, and risk-state monitoring to identify when a hike may require attention.</p><a className="button light-pill" href="#demo" tabIndex={phase && !reduced ? -1 : 0}>
             START YOUR RETURN PLAN ↗
           </a>
           <div className="orbit-tags">
@@ -159,7 +158,7 @@ export function OrbitStory() {
               </span>
             ))}
           </p>
-          <small>WATCH THE HIKE. UNDERSTAND THE SIGNALS.</small>
+          <small>DESIGN HYPOTHESIS · NOT ACCIDENT PREDICTION</small>
         </div>
         <div className="orbit-scene-footer">
           <span>YOUR HIKE SHOULD HAVE A RETURN PLAN.</span>
@@ -433,7 +432,7 @@ export function MetricCarousel({ state }: { state: DemoState }) {
           Small details.
           <br />A bigger picture.
         </h2>
-        <p>Illustrative values. One shared demo state.</p>
+        <p>Illustrative values, not validated thresholds or research statistics.</p>
       </div>
       <div className="metric-stage" ref={stage}>
         {media.map(([poster, video], i) => (
@@ -566,7 +565,7 @@ export function MetricCarousel({ state }: { state: DemoState }) {
                 [
                   state.active || state.completed
                     ? `${signal.risk} · live demo`
-                    : 'Start a hike to change the score',
+                    : 'Illustrative score · actual values are in the live prototype',
                   'Inactivity requires real GPS samples',
                   signal.gps ? 'GPS available · simulated' : 'Unknown does not mean inactive',
                   state.incident?.status || 'No duplicate escalations',
@@ -607,7 +606,7 @@ const channels = [
     name: 'Check-in',
     icon: '↗',
     title: 'A small message. A meaningful signal.',
-    body: 'A check-in records that the hiker is okay. In the prototype, the event appears in the same monitoring timeline as location and risk signals.',
+    body: 'A check-in records that the hiker is okay. The existing app offers a safety-response flow; the conversation shown here is an illustrative design concept.',
   },
   {
     name: 'Offline',

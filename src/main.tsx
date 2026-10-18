@@ -1,8 +1,17 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { demoReducer, defaultPlan, initialState, signals } from './demo';
-import { ProductDemo, ScenarioControls, Status, type PrototypeSnapshot } from './ProductDemo';
-import { TerrainMap } from './TerrainMap';
+import { initialState, signals } from './demo';
+import { ProductDemo, type PrototypeSnapshot } from './ProductDemo';
+import {
+  Cite,
+  EvidenceSection,
+  AlmatySection,
+  ApproachesSection,
+  EvidenceToDesign,
+  LimitationsSection,
+  ReferencesSection,
+} from './ResearchSections';
+import './research.css';
 import { ConnectedStory, MetricCarousel, OrbitStory } from './DesignStories';
 import './styles.css';
 import './design-stories.css';
@@ -11,34 +20,36 @@ import './prototype.css';
 const chapters = [
   'home',
   'problem',
+  'evidence',
+  'almaty',
+  'approaches',
   'solution',
+  'evidence-to-design',
   'how-it-works',
   'technology',
-  'signal-cards',
-  'live-map',
-  'offline',
-  'stay-connected',
   'demo',
   'architecture',
-  'almaty',
+  'limitations',
   'future',
   'closing',
+  'references',
 ];
 const chapterNames = [
-  'The way back',
+  'HIKE SAFE',
   'The problem',
-  'A return plan',
+  'Evidence',
+  'Why Almaty?',
+  'Current approaches',
+  'Our solution',
+  'From evidence to design',
   'How it works',
-  'Risk intelligence',
-  'The signals in focus',
-  'On the trail',
-  'Beyond the network',
-  'Stay in the loop',
+  'Technical logic',
   'Live prototype',
-  'Under the surface',
-  'Made for Almaty',
-  'What comes next',
-  'A way home',
+  'System architecture',
+  'Limitations',
+  'Future development',
+  'Conclusion',
+  'References',
 ];
 function Logo() {
   return (
@@ -53,7 +64,7 @@ function Logo() {
   );
 }
 function App() {
-  const [state, dispatch] = useReducer(demoReducer, initialState);
+  const state = initialState;
   const [prototype, setPrototype] = useState<PrototypeSnapshot | null>(null);
   const [menu, setMenu] = useState(false);
   const [presentation, setPresentation] = useState(false);
@@ -114,10 +125,12 @@ function App() {
         <nav className={menu ? 'open' : ''} aria-label="Main navigation">
           {[
             ['Problem', 'problem'],
+            ['Evidence', 'evidence'],
+            ['Almaty', 'almaty'],
             ['Solution', 'solution'],
             ['Technology', 'technology'],
             ['Demo', 'demo'],
-            ['Future', 'future'],
+            ['Sources', 'references'],
           ].map(([label, id]) => (
             <a key={id} href={`#${id}`} onClick={() => setMenu(false)}>
               {label}
@@ -141,8 +154,8 @@ function App() {
           <div className="hero-image" />
           <div className="hero-shade" />
           <div className="hero-coordinates">
-            <span>43°09′25.9″N</span>
-            <span>77°04′49.1″E</span>
+            <span>DEMO ROUTE</span>
+            <span>ALMATY CONTEXT</span>
             <i />
             <span>ILE-ALATAU · KAZAKHSTAN</span>
           </div>
@@ -153,7 +166,7 @@ function App() {
           </svg>
           <div className="hero-content">
             <span className="eyebrow">
-              <i className="tiny-dot" /> MOUNTAIN SAFETY PLATFORM
+              <i className="tiny-dot" /> 01 / HIKE SAFE · ASSIGNMENT 1
             </span>
             <h1>
               GO FURTHER.
@@ -163,8 +176,8 @@ function App() {
               <span>SAFELY.</span>
             </h1>
             <p>
-              Adventure takes you off the grid.
-              <br />A return plan helps bring you back.
+              A hiking safety prototype combining a return plan, GPS movement evidence and offline
+              risk monitoring.
             </p>
             <div className="hero-buttons">
               <a className="button primary" href="#solution">
@@ -206,7 +219,7 @@ function App() {
 
         <section id="problem" className="section problem-section">
           <div className="section-heading">
-            <span className="eyebrow">01 / THE SILENT PROBLEM</span>
+            <span className="eyebrow">02 / THE PROBLEM</span>
             <span className="section-aside">
               A beautiful trail.
               <br />
@@ -225,15 +238,15 @@ function App() {
               <p className="body-copy">
                 An injury. A wrong turn. A phone with no signal.
                 <br />
-                In the mountains, the person who needs help
-                <br />
-                may be the one who cannot ask for it.
+                NPS advises planning for a lost or injured companion; mountain rescue guidance warns
+                that phone contact may fail. <Cite ids={[1, 2]} />
               </p>
               <div className="quiet-statement">
-                <span>↗</span> Safety needs more than an SOS button.
+                <span>↗</span> Design question: how can a plan help when contact is absent?
               </div>
             </div>
             <div className="story-timeline">
+              <span className="evidence-label">ILLUSTRATIVE SCENARIO · NOT AN INCIDENT REPORT</span>
               {[
                 ['08:20', 'The hike begins.', 'A return plan is set.'],
                 ['11:47', 'Last confirmed movement.', 'The trail goes quiet.'],
@@ -252,35 +265,26 @@ function App() {
               ))}
             </div>
           </div>
-          <div className="comparison-row">
-            <div>
-              <small>01 / SOS BUTTON</small>
-              <h3>“I need help.”</h3>
-              <p>Depends on a hiker being able to act.</p>
-            </div>
-            <div>
-              <small>02 / LOCATION SHARING</small>
-              <h3>“I’m here.”</h3>
-              <p>A location alone does not explain risk.</p>
-            </div>
-            <div>
-              <small className="safe-text">03 / HIKE SAFE</small>
-              <h3>“Something may be wrong.”</h3>
-              <p>A plan, verified movement and time, together.</p>
-            </div>
-          </div>
         </section>
 
+        <EvidenceSection />
+
+        <AlmatySection />
+
+        <ApproachesSection />
+
         <OrbitStory />
+
+        <EvidenceToDesign />
 
         <section id="how-it-works" className="section how-section">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">03 / FROM FIRST STEP TO SAFE RETURN</span>
+              <span className="eyebrow">08 / HOW IT WORKS</span>
               <h2>
-                A simple plan.
+                From plan to attention.
                 <br />
-                <span className="muted">A connected journey.</span>
+                <span className="muted">A defined lifecycle.</span>
               </h2>
             </div>
             <a href="#demo" className="text-button">
@@ -292,7 +296,12 @@ function App() {
               ['01', 'Plan', 'Your route. Your return time. Your emergency contact.', '⌖'],
               ['02', 'Track', 'Location samples recorded during the active hike.', '↗'],
               ['03', 'Analyze', 'Time and verified movement become risk signals.', '≋'],
-              ['04', 'Escalate', 'A potential emergency becomes one incident.', '◎'],
+              [
+                '04',
+                'Escalate',
+                'Multiple signals can create one incident; no dispatch in this demo.',
+                '◎',
+              ],
               ['05', 'Resolve', 'Confirm a safe return. Close the hike and incident.', '✓'],
             ].map(([n, title, body, icon]) => (
               <article key={n}>
@@ -312,179 +321,147 @@ function App() {
           </div>
         </section>
 
-        <section id="technology" className="section risk-section">
-          <div className="risk-copy">
-            <span className="eyebrow">04 / READING THE SIGNALS</span>
-            <h2>
-              Risk is not
-              <br />
-              <span className="muted">one number.</span>
-            </h2>
-            <p className="body-copy">
-              A late return means something different from a lost GPS signal. Context is the
-              difference between a useful alert and a false alarm.
-            </p>
-            <div className="logic-rule">
-              <small>THE IMPORTANT DISTINCTION</small>
-              <h3>
-                NO GPS <span>≠</span> NO MOVEMENT
-              </h3>
-              <div className="wrong-logic">
-                × <del>No coordinates → stationary</del>
-              </div>
-              <div className="correct-logic">✓ No coordinates → location unknown</div>
-              <div className="correct-logic">✓ Similar verified coordinates → stationary</div>
-            </div>
-          </div>
-          <div className="risk-instrument">
-            <div className="panel-topline">
-              <span>RISK ENGINE / ACTUAL APP STATE</span>
-              <span>◈</span>
-            </div>
-            <div
-              className={`risk-gauge ${signal.risk.toLowerCase()}`}
-              style={{ '--score': `${prototype?.risk?.score ?? 0}%` } as React.CSSProperties}
-            >
-              <div>
-                <small>RISK SCORE</small>
-                <strong>{prototype?.risk?.score ?? '—'}</strong>
-                <span className="status">{prototype?.risk?.level || 'AWAITING HIKE'}</span>
-              </div>
-            </div>
-            <dl className="risk-signals">
-              <div>
-                <dt>Hike</dt>
-                <dd>{prototype?.active?.status || 'Awaiting hike'}</dd>
-              </div>
-              <div>
-                <dt>GPS</dt>
-                <dd>{prototype?.points ? `${prototype.points} demo samples` : 'No samples'}</dd>
-              </div>
-              <div>
-                <dt>Network</dt>
-                <dd>{prototype?.network || '—'}</dd>
-              </div>
-              <div>
-                <dt>Incident</dt>
-                <dd>{prototype?.alert?.lifecycle || 'Not created'}</dd>
-              </div>
-            </dl>
-            <a href="#demo" className="text-button">
-              CONTROL THE SIGNALS IN THE DEMO ↗
-            </a>
-            <p className="small-note">
-              Calculated by the existing prototype. A prototype, not a validated safety model.
-            </p>
-          </div>
-        </section>
-
-        <MetricCarousel state={state} />
-        <section id="live-map" className="section live-map-section">
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">05 / THE TRAIL TELLS A STORY</span>
+        <section id="technology" className="academic-technical">
+          <section className="section risk-section">
+            <div className="risk-copy">
+              <span className="eyebrow">09 / TECHNICAL LOGIC</span>
               <h2>
-                Every point.
+                Risk is not
                 <br />
-                <span className="muted">Part of the picture.</span>
+                <span className="muted">one number.</span>
               </h2>
+              <p className="body-copy">
+                A late return means something different from a lost GPS signal. The prototype keeps
+                these observations separate. Its thresholds are preliminary design rules, not
+                measured predictors. <Cite ids={[3]} />
+              </p>
+              <div className="logic-rule">
+                <small>THE IMPORTANT DISTINCTION</small>
+                <h3>
+                  NO GPS <span>≠</span> NO MOVEMENT
+                </h3>
+                <div className="wrong-logic">
+                  × <del>No coordinates → stationary</del>
+                </div>
+                <div className="correct-logic">✓ No coordinates → location unknown</div>
+                <div className="correct-logic">✓ Similar verified coordinates → stationary</div>
+              </div>
             </div>
-            <p>
-              From Medeu toward Furmanovka Peak.
-              <br />
-              Explore how the same route looks
-              <br />
-              under different conditions.
-            </p>
-          </div>
-          <div className="wide-map">
-            <TerrainMap state={state} />
-            <div className="map-overlay">
-              <small>YOUR NEXT SUMMIT</small>
-              <h3>{state.plan.destination}</h3>
-              <Status state={state} />
-              <dl>
+            <div className="risk-instrument">
+              <div className="panel-topline">
+                <span>RISK ENGINE / ACTUAL APP STATE</span>
+                <span>◈</span>
+              </div>
+              <div
+                className={`risk-gauge ${signal.risk.toLowerCase()}`}
+                style={{ '--score': `${prototype?.risk?.score ?? 0}%` } as React.CSSProperties}
+              >
                 <div>
-                  <dt>START</dt>
-                  <dd>{state.plan.start}</dd>
+                  <small>RISK SCORE</small>
+                  <strong>{prototype?.risk?.score ?? '—'}</strong>
+                  <span className="status">{prototype?.risk?.level || 'AWAITING HIKE'}</span>
+                </div>
+              </div>
+              <dl className="risk-signals">
+                <div>
+                  <dt>Hike</dt>
+                  <dd>{prototype?.active?.status || 'Awaiting hike'}</dd>
                 </div>
                 <div>
-                  <dt>EXPECTED RETURN</dt>
-                  <dd>{state.plan.expectedReturn}</dd>
+                  <dt>GPS</dt>
+                  <dd>{prototype?.points ? `${prototype.points} demo samples` : 'No samples'}</dd>
+                </div>
+                <div>
+                  <dt>Network</dt>
+                  <dd>{prototype?.network || '—'}</dd>
+                </div>
+                <div>
+                  <dt>Incident</dt>
+                  <dd>{prototype?.alert?.lifecycle || 'Not created'}</dd>
                 </div>
               </dl>
-              <p>
-                {state.active || state.completed
-                  ? signal.detail
-                  : 'Explore the explanatory route diagram. The actual application is below.'}
+              <a href="#demo" className="text-button">
+                CONTROL THE SIGNALS IN THE DEMO ↗
+              </a>
+              <p className="small-note">
+                Calculated by the existing prototype. A prototype, not a validated safety model.
               </p>
-              {!state.active && !state.completed && (
-                <button
-                  className="button primary full"
-                  onClick={() => dispatch({ type: 'start', plan: defaultPlan })}
-                >
-                  EXPLORE ROUTE DIAGRAM ↗
-                </button>
-              )}
             </div>
-          </div>
-          <ScenarioControls state={state} dispatch={dispatch} />
-          <small className="small-note">
-            Interactive explanation · illustrative data and route geometry. Independent of the real app below.
-          </small>
-        </section>
-
-        <section id="offline" className="section offline-section">
-          <div>
-            <span className="eyebrow">06 / DESIGNED FOR THE GAPS</span>
-            <h2>
-              Mountains don’t
-              <br />
-              guarantee <span className="muted">internet.</span>
-            </h2>
-            <p className="body-copy">
-              A weak connection should not erase the journey.
-              <br />
-              The planned mobile system stores available GPS samples
-              <br />
-              locally, then synchronizes when connectivity returns.
-            </p>
-            <div className="network-switch">
-              <span className={signal.network ? 'online' : ''}>
-                <i /> {signal.network ? 'ONLINE' : 'NO NETWORK'}
-              </span>
-              <strong>{state.queued.toString().padStart(2, '0')}</strong>
-              <small>EVENTS IN DEMO QUEUE</small>
-            </div>
-            <a className="text-button" href="#demo">
-              SIMULATE A LOST CONNECTION ↗
-            </a>
-          </div>
-          <div className="offline-flow">
-            {[
-              ['01', 'GPS sample', 'When a position is available'],
-              ['02', 'Local database', 'Stored on the device'],
-              ['03', 'Sync queue', 'Waiting for a connection'],
-              ['04', 'Server', 'Synchronized when online'],
-            ].map(([n, title, body]) => (
-              <div key={n}>
-                <span>{n}</span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{body}</p>
-                </div>
-                <i>{n === '03' && !signal.network ? '◷' : '↓'}</i>
+          </section>
+          <section className="section offline-section">
+            <div>
+              <span className="eyebrow">LOCAL STORAGE / DELIVERY STATE</span>
+              <h2>
+                Connectivity is
+                <br />
+                <span className="muted">not guaranteed.</span>
+              </h2>
+              <p className="body-copy">
+                A weak connection should not erase the journey.
+                <br />
+                The existing mobile repository stores available GPS samples
+                <br />
+                locally, with a queue for later synchronization. This follows a documented offline
+                architecture pattern. <Cite ids={[7, 8]} />
+              </p>
+              <div className="network-switch">
+                <span className={prototype?.network === 'ONLINE' ? 'online' : ''}>
+                  <i /> {prototype?.network || 'AWAITING APP'}
+                </span>
+                <strong>{prototype?.queueCount ?? '—'}</strong>
+                <small>EVENTS IN DEMO QUEUE</small>
               </div>
-            ))}
-            <p>
-              No network ≠ no GPS.
-              <br />
-              No GPS means no new position samples.
-            </p>
+              <a className="text-button" href="#demo">
+                SIMULATE A LOST CONNECTION ↗
+              </a>
+            </div>
+            <div className="offline-flow">
+              {[
+                ['01', 'GPS sample', 'When a position is available'],
+                ['02', 'Local database', 'Stored on the device'],
+                ['03', 'Sync queue', 'Waiting for a connection'],
+                ['04', 'Server', 'Synchronized when online'],
+              ].map(([n, title, body]) => (
+                <div key={n}>
+                  <span>{n}</span>
+                  <div>
+                    <h3>{title}</h3>
+                    <p>{body}</p>
+                  </div>
+                  <i>{n === '03' && prototype?.demoOffline ? '◷' : '↓'}</i>
+                </div>
+              ))}
+              <p>
+                No network ≠ no GPS.
+                <br />
+                No GPS means no new position samples.
+              </p>
+            </div>
+          </section>
+          <div className="technical-notes">
+            <div>
+              <h3>Unknown is not stationary.</h3>
+              <p>
+                Fresh, reliable samples can support low-movement evidence. Missing or stale samples
+                produce unknown movement. That is a project rule motivated by GPS uncertainty.{' '}
+                <Cite ids={[3]} />
+              </p>
+            </div>
+            <div>
+              <h3>A queue is not a rescue.</h3>
+              <p>
+                Storing an event offline preserves information. It does not contact anyone. An alert
+                remains undelivered until communication and the receiving service succeed.
+              </p>
+            </div>
           </div>
+          <details className="technical-extras">
+            <summary>OPTIONAL VISUAL EXPLANATION · illustrative UI, not research evidence</summary>
+            <MetricCarousel state={state} />
+            <ConnectedStory />
+          </details>
         </section>
 
-        <ConnectedStory />
         <section id="demo" className="section demo-section">
           <ProductDemo onSnapshot={setPrototype} />
         </section>
@@ -492,7 +469,7 @@ function App() {
         <section id="architecture" className="section architecture-section">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">08 / UNDER THE SURFACE</span>
+              <span className="eyebrow">11 / SYSTEM ARCHITECTURE</span>
               <h2>
                 Local first.
                 <br />
@@ -500,11 +477,11 @@ function App() {
               </h2>
             </div>
             <p>
-              Proposed mobile architecture.
+              Existing code, with a demo boundary.
               <br />
-              This presentation runs entirely
+              The browser runs the real app locally;
               <br />
-              as a local browser simulation.
+              backend delivery is disabled.
             </p>
           </div>
           <div className="architecture-flow">
@@ -513,11 +490,11 @@ function App() {
                 '01',
                 'MOBILE APP',
                 'Expo / React Native',
-                ['GPS tracking', 'SQLite storage', 'Offline sync queue'],
+                ['Existing screens + risk rules', 'SQLite local storage [8]', 'Offline sync queue'],
               ],
               [
                 '02',
-                'DATA PLATFORM',
+                'BACKEND · NOT CONNECTED IN DEMO',
                 'Supabase',
                 ['Authentication', 'Hikes & GPS samples', 'PostgreSQL incidents'],
               ],
@@ -565,70 +542,16 @@ function App() {
           </div>
         </section>
 
-        <section id="almaty" className="almaty-section">
-          <div className="almaty-image" />
-          <div className="almaty-content">
-            <span className="eyebrow">09 / CLOSE TO HOME</span>
-            <h2>
-              A city at the
-              <br />
-              foot of adventure.
-            </h2>
-            <p>
-              Built around a real Almaty problem.
-              <br />
-              Nearby mountain trails invite exploration.
-              <br />
-              Terrain and unreliable connectivity can make
-              <br />
-              an emergency harder to communicate.
-            </p>
-            <div className="almaty-coordinate">
-              <span>43.2389° N</span>
-              <i />
-              <span>76.8897° E</span>
-            </div>
-          </div>
-          <div className="aruzhan-story">
-            <small>AN ILLUSTRATIVE JOURNEY / ARUZHAN</small>
-            <h3>
-              A hike. A pause.
-              <br />A signal worth noticing.
-            </h3>
-            <div>
-              <span>08:12</span>
-              <p>Leaves Medeu with a return plan.</p>
-            </div>
-            <div>
-              <span>13:42</span>
-              <p>Verified positions remain in a small area.</p>
-            </div>
-            <div>
-              <span>17:03</span>
-              <p>Overdue + confirmed inactivity → critical.</p>
-            </div>
-            <div>
-              <span>17:04</span>
-              <p>One simulated incident is created.</p>
-            </div>
-            <blockquote>
-              We cannot prevent every accident.
-              <br />
-              We can work toward making
-              <br />
-              silence visible sooner.
-            </blockquote>
-          </div>
-        </section>
+        <LimitationsSection />
 
         <section id="future" className="section future-section">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">10 / A RESPONSIBLE WAY FORWARD</span>
+              <span className="eyebrow">13 / FUTURE DEVELOPMENT</span>
               <h2>
-                A working concept.
+                Validate before expanding.
                 <br />
-                <span className="muted">A bigger horizon.</span>
+                <span className="muted">Measure what matters.</span>
               </h2>
             </div>
             <p>
@@ -645,25 +568,25 @@ function App() {
                 '01',
                 'NOW',
                 'Interactive prototype',
-                'Hike plans, risk scenarios, offline queue simulation and incident lifecycle.',
+                'Functional tests of the existing app: hike creation, GPS uncertainty, risk transitions and completion.',
               ],
               [
                 '02',
                 'NEXT',
                 'Real-world testing',
-                'Route testing, battery optimization, offline validation and fewer false positives.',
+                'Measure battery drain, GPS gaps and background continuity on real devices; record conditions and failures.',
               ],
               [
                 '03',
                 'PLANNED',
                 'Safety integrations',
-                'Explore trusted contacts, mapping providers and verified emergency workflows.',
+                'Evaluate false alerts and missed events with labelled scenarios; revise thresholds before any field claims.',
               ],
               [
                 '04',
                 'POSSIBLE',
                 'More context',
-                'Terrain, weather, smartwatches and satellite-capable devices.',
+                'Consider verified contact and rescue workflows only after agreements, privacy review and validation.',
               ],
             ].map(([n, label, title, body], i) => (
               <article key={n} className={i === 0 ? 'current' : ''}>
@@ -685,7 +608,7 @@ function App() {
         <section id="closing" className="closing-section">
           <div className="closing-image" />
           <div className="closing-content">
-            <span className="eyebrow">THE SUMMIT IS ONLY HALF THE JOURNEY.</span>
+            <span className="eyebrow">14 / CONCLUSION</span>
             <h2>
               EVERY HIKE
               <br />
@@ -694,8 +617,10 @@ function App() {
               <span>A WAY HOME.</span>
             </h2>
             <p>
-              A hike plan. Location signals. Time.
-              <br />A chance to notice when something may be wrong.
+              The contribution is a traceable combination of plan, time and movement evidence.
+              <br />
+              The next step is to test whether it provides useful attention without excessive false
+              alarms.
             </p>
             <div className="hero-buttons">
               <a className="button primary" href="#demo">
@@ -712,6 +637,8 @@ function App() {
             <span>ALMATY, KAZAKHSTAN · 2026</span>
           </footer>
         </section>
+
+        <ReferencesSection />
       </main>
       <div className={`presentation-controls ${presentation ? 'enabled' : ''}`}>
         <button

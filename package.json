@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1 --port 4173",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "build:pages": "vite build --base=/hikesafepresentaition/ --outDir docs && node scripts/finalize-pages.mjs"
   },
   "dependencies": {
     "react": "19.2.3",
