@@ -12,7 +12,7 @@ import {
   ReferencesSection,
 } from './ResearchSections';
 import './research.css';
-import { ConnectedStory, MetricCarousel, OrbitStory } from './DesignStories';
+import { ConnectedStory, OrbitStory } from './DesignStories';
 import './styles.css';
 import './design-stories.css';
 import './prototype.css';
@@ -455,7 +455,6 @@ function App() {
               </p>
             </div>
           </div>
-          <MetricCarousel state={state} />
           <details className="technical-extras">
             <summary>OPTIONAL VISUAL EXPLANATION · illustrative UI, not research evidence</summary>
             <ConnectedStory />
