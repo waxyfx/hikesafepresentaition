@@ -455,9 +455,9 @@ function App() {
               </p>
             </div>
           </div>
+          <MetricCarousel state={state} />
           <details className="technical-extras">
             <summary>OPTIONAL VISUAL EXPLANATION · illustrative UI, not research evidence</summary>
-            <MetricCarousel state={state} />
             <ConnectedStory />
           </details>
         </section>

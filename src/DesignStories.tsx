@@ -453,6 +453,10 @@ export function MetricCarousel({ state }: { state: DemoState }) {
               muted
               loop
               playsInline
+              onCanPlay={(event) => {
+                if (motion.current.visible && !document.hidden && !reduced && !paused)
+                  void event.currentTarget.play().catch(() => {});
+              }}
               preload="none"
               poster={base + poster}
               src={base + video}
